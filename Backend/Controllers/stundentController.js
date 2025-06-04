@@ -1,6 +1,20 @@
 import Student from "../models/student.js"
 
 export async function getStudents(req,res){
+
+    /* Student.find().then(
+            
+            (students)=>{
+    
+            res.json(students)
+            console.log("finding Success")
+    
+        }).catch(()=>{
+    
+            res.json({
+                "Message":"Can't find"
+            })
+        })  */
         // search recodes
               try{
                 const students=await Student.find()
