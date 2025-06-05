@@ -7,4 +7,4 @@ install bcrypt:-npm install bcrypt (hashSync:-crate ##taging)
 install bcrypt:-npm install bcrypt (comparesynv:-remove ##taging)
 install webtoken:- npm install jsonwebtoken
 start project with npm:-npm init -y
-set email for git:-git config --global user.email "mail id"
+link git hub and git:-git config --global user.email "mail id"
