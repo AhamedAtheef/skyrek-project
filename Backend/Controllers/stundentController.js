@@ -27,7 +27,6 @@ export async function getStudents(req,res){
 
               }
 }
-
 export function createStudents(req,res){
      console.log(req.body)
      if(req.user == null){
