@@ -1,9 +1,9 @@
 import express from "express"
 import mongoose from "mongoose"
 import bodyParser from "body-parser"
-import studentRouter from "./Router/studentRouter.js"
 import userRouter from "./Router/userRouter.js";
 import jwt from "jsonwebtoken";
+import productrouter from "./Router/productRouter.js";
 
 
 const app = express()
@@ -40,9 +40,10 @@ mongoose.connect(connectionString).then(() => {
     console.log("Failed to connect to the database")
 })
 
-app.use("/students", studentRouter)
+
+app.use("/products",productrouter)
 app.use("/users", userRouter)
 
 app.listen(5000, () => {
-    console.log("Server Started") 
+    console.log("Server started") 
 })

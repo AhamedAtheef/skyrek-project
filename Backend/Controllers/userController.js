@@ -27,9 +27,9 @@ export function createUser(req, res) {
     })
 }
 
-export function getUser(req, res) {
+export async function getUser(req, res) {
 
-    User.find().then((users) => {
+   /*  User.find().then((users) => {
         res.json(users)
         console.log("Finding Success")
 
@@ -37,7 +37,15 @@ export function getUser(req, res) {
         res.json({
             message: "Can't find users"
         })
-    })
+    }) */
+
+        try{
+            const user = await User.find()
+            res.json(user)
+        }catch(error){
+             res.status(500).json({message:"failed to fetch students",
+             error:error.message})
+        }
 
 }
 
@@ -73,4 +81,17 @@ export function loginUser(req,res){
     }
 })
 }
+
+export function isAdmin(req) {
+    if (req.user == null) {
+        return false;
+    } 
+
+    if (req.user.role == "admin") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
