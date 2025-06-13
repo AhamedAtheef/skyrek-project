@@ -4,6 +4,9 @@ import bodyParser from "body-parser"
 import userRouter from "./Router/userRouter.js";
 import jwt from "jsonwebtoken";
 import productrouter from "./Router/productRouter.js";
+import dotenv from "dotenv"
+//load all veribales in .env
+dotenv.config()
 
 
 const app = express()
@@ -13,7 +16,7 @@ app.use((req,res,next)=>{
       const tvalue=req.header("Authorization")
       if (tvalue != null){
         const tvalue2=tvalue.replace("Bearer ","")
-        jwt.verify(tvalue2,"ATHEEF-2007",(err,decoded)=>{
+        jwt.verify(tvalue2,process.env.Jwt_Key,(err,decoded)=>{
           if(decoded == null){
             res.status(403).json({message:"UnAuthorized"})
           }
@@ -31,8 +34,7 @@ app.use((req,res,next)=>{
 })
 
 // connect mongodb
-const connectionString = "mongodb+srv://Atheef:Atheef12345@cluster0.vh4jmgg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
+const connectionString = process.env.Mongo_Url
 /* then=true , catch=false */
 mongoose.connect(connectionString).then(() => {
     console.log("Connected to database")

@@ -11,4 +11,6 @@ link git hub and git:-git config --global user.email "mailid"
 remove file and follder only git hub:-git rm --cached
 connetct desktop and github:- gh auth login
 introduce follders for npm :-npm init -y
+download vite:-npm create vite@latest
+install env :- npm install dotenv
                               
