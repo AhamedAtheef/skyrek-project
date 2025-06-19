@@ -13,4 +13,5 @@ connetct desktop and github:- gh auth login
 introduce follders for npm :-npm init -y
 download vite:-npm create vite@latest
 install env :- npm install dotenv
+install react router :-  npm install react-router-dom
                               
