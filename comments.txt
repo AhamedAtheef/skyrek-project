@@ -14,4 +14,7 @@ introduce follders for npm :-npm init -y
 download vite:-npm create vite@latest
 install env :- npm install dotenv
 install react router :-  npm install react-router-dom
+install axios :-npm install axios
+install cors :- npm install cors
+install react-hot-toast :- npm install react-hot-toast
                               

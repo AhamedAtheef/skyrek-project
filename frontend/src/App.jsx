@@ -5,12 +5,14 @@ import Loginpage from "./pages/loginpage"
 import Registerpage from "./pages/Registerpage"
 import Adminpage from "./pages/Adminpage"
 import Testpage from "./pages/Testpage"
+import { Toaster } from "react-hot-toast"
 
 function App() {
  
   return (
     <BrowserRouter>
       <div className="w-full h-screen">
+        <Toaster possition="top-right"/>
         <Routes path="/">
         <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Loginpage/>}/>

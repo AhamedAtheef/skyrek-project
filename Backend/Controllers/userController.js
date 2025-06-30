@@ -76,7 +76,7 @@ export function loginUser(req,res){
 
            },process.env.Jwt_Key)
 
-        res.json({message:"Login success",token:token,})
+        res.json({message:"Login success",token:token,role:user.role})
       }else{
         res.json({message:"Incorrect password"})
       }

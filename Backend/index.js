@@ -4,13 +4,16 @@ import bodyParser from "body-parser"
 import userRouter from "./Router/userRouter.js";
 import jwt from "jsonwebtoken";
 import productrouter from "./Router/productRouter.js";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
+import cors from "cors";
 //load all veribales in .env
 dotenv.config()
 
 
 const app = express()
 app.use(bodyParser.json())
+app.use(cors())//accept all req
+
 
 app.use((req,res,next)=>{
       const tvalue=req.header("Authorization")
