@@ -3,6 +3,8 @@ import { FaBoxArchive } from "react-icons/fa6";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaUserFriends } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
+import ProductsAdminPage from "./admin/productAdminPage";
+import AddProductPage from "./admin/addProductsAdminPage";
 
 export default function Adminpage(){
     return (
@@ -17,10 +19,11 @@ export default function Adminpage(){
                        
                     </div>
                 </div>
-                <div className="w-[calc(100%-300px)] bg-blue-300 text-center text-xl">
+                <div className="w-[calc(100%-300px)] bg-blue-300 text-xl">
                     <Routes>
                         <Route path="/" element={<h1>DashBoard</h1>}/>
-                        <Route path="/products" element={<h1>Products</h1>}/>
+                        <Route path="/products" element={<ProductsAdminPage/>}/>
+                        <Route path="/newproduct" element={<AddProductPage/>}/>
                         <Route path="/orders" element={<h1>Orders</h1>}/>
                     </Routes>
                 </div>

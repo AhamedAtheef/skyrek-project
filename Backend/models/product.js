@@ -7,7 +7,7 @@ const productShema=mongoose.Schema(
         required: true,
         unique: true
     },
-    name: {
+    productname: {
         type: String,
         required: true
     },
@@ -42,7 +42,6 @@ const productShema=mongoose.Schema(
     },
     category: {
         type: String,
-        required: true,
         default: "cosmatics"
     } 
 
