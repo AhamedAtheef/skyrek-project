@@ -5,8 +5,8 @@ import { FaUserFriends } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import ProductsAdminPage from "./admin/productAdminPage";
 import AddProductPage from "./admin/addProductsAdminPage";
-
 export default function Adminpage(){
+    
     return (
             <div className="w-full h-screen bg-white flex">
                 <div className="w-[300px] h-full bg-white" >

@@ -9,7 +9,7 @@ export default function Loginpage() {
     const [password, setPassword] = useState("")
     const navigate = useNavigate() //Load page smoothly
 
-    function login() {
+       function login() {
         axios.post(import.meta.env.VITE_BACKEND_URL + "/api/users/login", {
             email: email,
             password: password

@@ -1,26 +1,22 @@
 import { useState } from "react"
+import UploadFile from "../utils/meadiaupload"
+import toast from "react-hot-toast"
 
 export default function Testpage(){
-    const [count,setCount] = useState(0)
-
-    function increment(){
-        setCount(count+1)
+    const [file,setFiles]= useState(null)
+    function handleupload(){
+        UploadFile(file).then((url)=>{
+            console.log(url)
+            toast.success("File uploaded")
+        }).catch((error)=>{
+           console.error(error)
+        })
     }
-    
-    function decrement(){
-        setCount(count-1)
-    }
-
-
     return(
-        <div className="w-full h-screen bg-amber-200 flex justify-center items-center">
-            <div className="w-[400px] h-[400px] bg-white flex flex-col justify-center items-center">
-                <h1 className="text-5xl font-bold">{count}</h1>
-                <div className="w-full flex justify-center items-center mt-5">
-                    <button onClick={decrement} className="bg-purple-600 text-white w-[80px] p-[2px] mr-[8px] text-2xl text-center rounded-[20px] cursor-pointer">-</button>
-                    <button onClick={increment} className="bg-purple-600 text-white w-[80px] p-[2px] mr-[5px] text-2xl rounded-[20px] cursor-pointer">+</button>
-                    </div>
-            </div>
-        </div>
+       <div>
+        <input type="file" name="" id="" onChange={(e)=>{setFiles(e.target.files[0])}}/>
+        <button onClick={handleupload}>Upload</button>
+       </div>
+       
     )
 }

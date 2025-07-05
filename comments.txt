@@ -17,4 +17,5 @@ install react router :-  npm install react-router-dom
 install axios :-npm install axios
 install cors :- npm install cors
 install react-hot-toast :- npm install react-hot-toast
+install supabase :-npm install @supabase/supabase-js  // Add images
                               

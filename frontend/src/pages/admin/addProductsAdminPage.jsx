@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import UploadFile from "../../utils/meadiaupload";
 
 
 export default function AddProductPage() {
@@ -23,23 +24,29 @@ export default function AddProductPage() {
     const [altnames, setAltnames] = useState("");
     const [labelledPrice, setLaballedprice] = useState("");
     const [price, setPrice] = useState("");
-    const [images, setImages] = useState(""); // or [] if you're uploading images later
+    const [images, setImages] = useState([]); // or [] if you're uploading images later
     const [discription, setDiscription] = useState("");
     const [stock, setStock] = useState("");
     const [isAvailable, setIsAvailable] = useState(true);
     const [category, setCateqory] = useState("");
     const navigate = useNavigate();
 
-    function handleSubmit() {
-        const alternativInArray = altnames.split(",");
+    async function handleSubmit() {
+        
 
+    const promisesArray = images.map((image) => UploadFile(image));
+
+    const response = await Promise.all(promisesArray);
+    console.log(response)
+
+        const alternativInArray = altnames.split(",");
         const productData = {
             productId,
             productname,
             altnames: alternativInArray,
             labelledPrice,
             price,
-            images: [], // Update later if using file uploads
+            images: response, // Update later if using file uploads
             discription,
             stock,
             isAvailable: isAvailable,
@@ -68,21 +75,22 @@ export default function AddProductPage() {
                 console.log(error);
             });
 
-        console.log(productData);
     }
 
 
     return (
         <div className="w-full h-full bg-white grid place-content-center">
+                <div className="text-center mb-[30px] font-medium text-3xl">
+                    <h1>Add Your Products</h1>
+                </div>
             <div className="w-[600px] h-[700px] border-[2px] rounded-2xl flex flex-row flex-wrap justify-between p-[40px]">
-
                 <div className="w-[200px] flex flex-col gap-[10px]">
                     <label>Product Id</label>
                     <input
                         type="text"
                         value={productId}
                         onChange={(e) => setProductId(e.target.value)}
-                        className="w-full border rounded-[5px]"
+                        className="w-full  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -92,7 +100,7 @@ export default function AddProductPage() {
                         type="text"
                         value={productname}
                         onChange={(e) => setProductname(e.target.value)}
-                        className="w-full border rounded-[5px]"
+                        className="w-full  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -102,7 +110,7 @@ export default function AddProductPage() {
                         type="text"
                         value={altnames}
                         onChange={(e) => setAltnames(e.target.value)}
-                        className="w-full border rounded-[5px]"
+                        className="w-full  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -112,7 +120,7 @@ export default function AddProductPage() {
                         type="number"
                         value={labelledPrice}
                         onChange={(e) => setLaballedprice(e.target.value)}
-                        className="w-full border rounded-[5px]"
+                        className="w-full  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -122,18 +130,19 @@ export default function AddProductPage() {
                         type="number"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        className="w-full border rounded-[5px]"
+                        className="w-full  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     />
                 </div>
 
                 <div className="w-[500px] flex flex-col gap-[10px]">
                     <label>Image</label>
                     <input
-                        type="text"
-                        value={images}
-                        onChange={(e) => setImages(e.target.value)}
-                        className="w-full border rounded-[5px]"
+                         multiple
+                        type="file"
+                        onChange={(e) => setImages([...e.target.files])}
+                        className="w-full  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     />
+
                 </div>
 
                 <div className="w-[500px] flex flex-col gap-[10px]">
@@ -141,7 +150,7 @@ export default function AddProductPage() {
                     <textarea
                         value={discription}
                         onChange={(e) => setDiscription(e.target.value)}
-                        className="w-full h-[100px] border rounded-[5px]"
+                        className="w-full h-[100px]  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     ></textarea>
                 </div>
 
@@ -151,7 +160,7 @@ export default function AddProductPage() {
                         type="number"
                         value={stock}
                         onChange={(e) => setStock(e.target.value)}
-                        className="w-full border rounded-[5px]"
+                        className="w-full  rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -160,7 +169,7 @@ export default function AddProductPage() {
                     <select
                         value={isAvailable}
                         onChange={(e) => setIsAvailable(e.target.value)}
-                        className="border rounded-[5px]"
+                        className=" rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     >
                         <option value={true}>Available</option>
                         <option value={false}>Not Available</option>
@@ -172,17 +181,17 @@ export default function AddProductPage() {
                     <select
                         value={category}
                         onChange={(e) => setCateqory(e.target.value)}
-                        className="border rounded-[5px]"
+                        className=" rounded-[5px] border-[2px] focus:border-blue-900 focus:outline-none"
                     >
                         <option value="Cream">Cream</option>
                         <option value="Soap">Soap</option>
                         <option value="Face Wash">Face Wash</option>
-                        <option value="Fragrance">Fragrance</option>
+                        <option value="Fragrance" >Fragrance</option>
                     </select>
                 </div>
 
                 <div className="w-full flex justify-center items-center mt-[30px] gap-[30px]">
-                    <Link to="/admin/products" className="border-[2px]  w-[200px] px-[20px] py-[5px] rounded-[5px] text-center">Cancel</Link>
+                    <Link to="/admin/products" className="border-[2px]  w-[200px] px-[20px] py-[5px] rounded-[5px] text-center hover:bg-gray-100 ">Cancel</Link>
                     <button className="w-[200px]  px-[20px] py-[6px] rounded-[5px] cursor-pointer text-center  bg-black text-white " onClick={handleSubmit}>Add Products</button>
                 </div>
 
