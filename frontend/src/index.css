@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+.custom-shadow {
+    box-shadow: 27.5px 24px 15.7px 6.7px rgba(6, 26, 40, 0.3);
+    -webkit-box-shadow: 27.5px 24px 15.7px 6.7px rgba(6, 26, 40, 0.3);
+  }
+
+.custom-shadow-blue {
+    box-shadow: 29.2px 24px 21.2px 0px rgba(51, 181, 224, 0.68);
+    -webkit-box-shadow: 29.2px 24px 21.2px 0px rgba(1, 14, 18, 0.689);
+}  
