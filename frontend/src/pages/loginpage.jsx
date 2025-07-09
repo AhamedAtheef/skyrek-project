@@ -39,11 +39,21 @@ export default function Loginpage() {
 
     return (
         <div className="w-full h-screen bg-[url('/login.jpg')] bg-cover bg-center bg-no-repeat grid place-content-center">
-            <div className="w-[450px] h-[610px] backdrop-blur-sm flex flex-col pt-[10px] items-center rounded-[30px] custom-shadow-blue">
-                <div className="mt-[30px] mb-[20px]">
+            <div className="w-[70rem] h-[620px] backdrop-blur-sm flex gap-[110px] rounded-[30px] custom-shadow">
+                <div className="w-[calc(100%-50%)] rounded-l-[30px] text-white flex flex-col items-center relative">
+                    <div className="absolute z-10 text-center px-[20px] pt-[8rem] flex flex-col items-center gap-[3rem]">
+                        <h1 className=" text-4xl font-bold ">Heading</h1>
+                    <span className="text-gray-400 text-[18px]">Experience luxury with our skin-friendly cosmetics, carefully crafted to enhance your natural beauty, nourish your skin, and give you the radiant confidence to shine every single day. Discover elegance in every shade and glow like never before.</span>
+                    <Link className=" w-[10rem] text-2xl text-center pb-[5px] rounded-2xl  bg-gradient-to-r from-blue-500 to-cyan-400 shadow-[0_4px_10px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_15px_rgba(0,0,0,0.7)] transition-shadow" to="/">Get Started</Link>
+
+                    </div>
+                    <img src="/cream.jpg" alt="" className="w-full h-full absolute rounded-l-[30px]"/>
+                </div>
+                <div className="flex flex-col items-center ">
+                    <div className="mt-[30px] mb-[20px]">
                     <h1 className="text-[#2c7bb0] font-bold text-[35px]">Welcome Back</h1>
                     <h2 className="text-[20px] text-[#343a46]">Login to your beauty account</h2>
-                </div>
+                    </div>
                 
                 <form onSubmit={(e) => { e.preventDefault(); login(); }} className="flex flex-col gap-[35px] pt-[30px] relative">
                     <input
@@ -83,7 +93,7 @@ export default function Loginpage() {
                 <span className="mt-[20px] text-[17px] text-[#232933]">
                     Don't have an account? <Link className="text-blue-900" to="/registerpage">SignUp</Link> from here
                 </span>
-                <span className="mt-[5px] text-[17px] text-[#161b24] text-center">OR</span>
+                <span className="mt-[5px] text-[17px] text-[#161b24] text-center">OR Continue With</span>
                 <div className="flex flex-col gap-[20px] mt-[10px]">
                     <div className="w-[350px] h-[40px] text-[18px] border border-[#416793] px-3 rounded-[10px] text-black bg-transparent outline-none flex items-center justify-center gap-[10px] cursor-pointer">
                             <FaFacebookF className="text-white bg-blue-600 py-[5px] px-[2px] rounded-[5px] cursor-pointer text-3xl" />
@@ -94,6 +104,7 @@ export default function Loginpage() {
                         <span>Sign With Google</span>
                     </div>
                     </div>
+                </div>
             </div>
         </div>
     );

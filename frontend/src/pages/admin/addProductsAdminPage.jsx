@@ -83,7 +83,7 @@ export default function AddProductPage() {
                 <div className="text-center mb-[30px] font-medium text-3xl">
                     <h1>Add Your Products</h1>
                 </div>
-            <div className="w-[600px] h-[700px] border-[2px] rounded-2xl flex flex-row flex-wrap justify-between p-[40px]">
+            <div className="w-[620px] h-[720px] border-[2px] rounded-2xl flex flex-row flex-wrap justify-between p-[40px]">
                 <div className="w-[200px] flex flex-col gap-[10px]">
                     <label>Product Id</label>
                     <input
