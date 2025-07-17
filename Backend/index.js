@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import productrouter from "./Router/productRouter.js";
 import dotenv from "dotenv";
 import cors from "cors";
-//load all veribales in .env
+//load .env
 dotenv.config()
 
 

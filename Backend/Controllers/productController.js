@@ -11,6 +11,7 @@ export async function createProducts(req, res) {
 
 
     const product = new Product(req.body)
+    
 
     try {
         const response = await product.save()
