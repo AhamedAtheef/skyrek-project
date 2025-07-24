@@ -16,10 +16,10 @@ app.use(cors())//accept all req
 
 
 app.use((req,res,next)=>{
-      const tvalue=req.header("Authorization")
-      if (tvalue != null){
-        const tvalue2=tvalue.replace("Bearer ","")
-        jwt.verify(tvalue2,process.env.Jwt_Key,(err,decoded)=>{
+      const tokenvalue=req.header("Authorization")
+      if (tokenvalue != null){
+        const tokenvalue2=tokenvalue.replace("Bearer ","")
+        jwt.verify(tokenvalue2,process.env.Jwt_Key,(err,decoded)=>{
           if(decoded == null){
             res.status(403).json({message:"UnAuthorized"})
           }
@@ -43,7 +43,7 @@ mongoose.connect(connectionString).then(() => {
     console.log("Connected to database")
 }).catch(() => {
     console.log("Failed to connect to the database")
-})
+}) 
 
 
 app.use("/api/products",productrouter)

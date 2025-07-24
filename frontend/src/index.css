@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.8);
+  }
+}
+
+.bar-wave {
+  animation: wave 1s infinite ease-in-out;
+}
+
+
 .custom-shadow {
    -webkit-box-shadow: -0.8px 0.6px 12.6px 8.3px rgba(0, 0, 0, 0.4); 
   box-shadow: -0.8px 0.6px 12.6px 8.3px rgba(0, 0, 0, 0.4);

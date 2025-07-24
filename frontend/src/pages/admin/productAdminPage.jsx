@@ -48,7 +48,7 @@ export default function ProductsAdminPage() {
               return (
                 <tr key={index}>
                   <td className="p-[7px] ">
-                    <img src={product.images[0]} alt={product.productname} className="w-[50px] h-[50px]" />
+                    <img src={product.images[0]} alt={product.productimage} className="w-[50px] h-[50px]" />
                   </td>
                   <td className="p-[7px] text-center">{product.productId}</td>
                   <td className="p-[7px] text-center">{product.productname}</td>
@@ -77,7 +77,7 @@ export default function ProductsAdminPage() {
                           })
                       }
                     } />
-                    <BiEdit className="text-3xl text-[#152f22] cursor-pointer ml-[10px]" onClick={() => { navigate("/admin/update", { state: product }) }} />
+                    <BiEdit className="text-3xl text-[#152f22] cursor-pointer ml-[10px]" onClick={() => { navigate("/admin/update", { state: product}) }} />
                   </td>
                 </tr>
               );

@@ -1,20 +1,42 @@
-import "./productcard.css"
+import { Link } from "react-router-dom";
 
-
-// use function name first latter uppercase
 export default function ProductCard(props) {
+  const product = props.product;
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden transition-transform hover:scale-105 hover:shadow-lg p-4 max-w-sm">
-      <img
-        src={props.image}
-        alt={props.name}
-        className="w-full h-48 object-cover rounded-xl mb-4"
-      />
-      <h1 className="text-xl font-semibold text-gray-800 mb-2">{props.name}</h1>
-      <p className="text-lg text-green-600 font-medium mb-4">${props.price}</p>
-      <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-        View More
-      </button>
-    </div>
+    <Link to={"/user/overview/"+product.productId} className="w-65 h-[360px] rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white">
+      {/* image */}
+      <div className="bg-gray-100 w-full  overflow-hidden relative">
+        <div class="inline-block bg-green-600 text-white text-sm font-semibold px-3 py-1 absolute  rounded-r-[0.25rem]">
+          {product.labelledPrice > product.price ? ('Discounted' ): (<span>{product.price.toFixed(2)}</span>) }
+        </div>
+
+        <img
+          src={product.images[0]} alt={product.productimage}
+          className="h-[220px] w-full object-cover"
+        />
+      </div>
+
+      {/* content */}
+      <div className="pb-4 px-4 pt-2">
+        {/* product name */}
+        <h2 className="text-[22px] font-semibold text-gray-800">
+          {product.productname}
+        </h2>
+
+        <div className="flex gap-[25px] mt-[10px]">
+          {/* price */}
+          <p className="text-[22px] font-bold text-gray-900"><span>LKR{product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
+          {/* labelled Price */}
+          <p className="text-[19px] text-gray-500 line-through"><span>LKR{product.labelledPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
+        </div>
+
+        {/* stock */}
+        <p className={`mt-2 text-sm font-medium ${product.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
+          {product.stock > 0 ? `${product.stock} in stock` : 'All most sold out'}
+        </p>
+
+
+      </div>
+    </Link>
   );
 }

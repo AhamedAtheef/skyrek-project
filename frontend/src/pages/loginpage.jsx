@@ -36,7 +36,7 @@ export default function Loginpage() {
                 return toast.error("Failed To Create An Account")
             }
             toast.success("Successfully Created An Account")
-            navigate("/")
+            navigate("/cleint/home")
 
         }).catch((error)=>{
             console.log(error)
@@ -61,7 +61,7 @@ export default function Loginpage() {
             if (res.data.role === "admin") {
                 navigate("/admin");
             } else {
-                navigate("/");
+                navigate("/user/home");
             }
         }).catch((error) => {
             console.log(error);
