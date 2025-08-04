@@ -30,10 +30,10 @@ export default function ProductsAdminPage() {
           to="/admin/newproduct" className="fixed top-4 right-[50px] flex flex-row items-center gap-[2px] bg-[#152f22] text-white px-[10px] py-[5px] rounded-lg ">
           <GoPlus className="text-2xl" /><span className="text-center mb-[3px] mr-[2px]">Create New</span></Link>
 
-        {loading ? <Loading /> : <table className="w-full  my-4 ">
+        {loading ? <Loading /> : <table className="w-full my-4 ">
           <thead className="border-2 border-gray-300 ">
-            <tr>
-              <th className="text-[21px] p-[7px] text-center font-medium">Image</th>
+            <tr >
+              <th className="text-[21px] px-[7px] text-center font-medium">Image</th>
               <th className="text-[21px] p-[7px] text-center font-medium">Product Id</th>
               <th className="text-[21px] p-[7px] text-center font-medium">Product Name</th>
               <th className="text-[21px] p-[7px] text-center font-medium">Price</th>
@@ -46,8 +46,8 @@ export default function ProductsAdminPage() {
           <tbody className="border-2 border-gray-300 ">
             {products.map((product, index) => {
               return (
-                <tr key={index}>
-                  <td className="p-[7px] ">
+                <tr key={index} >
+                  <td className="p-[10px] ">
                     <img src={product.images[0]} alt={product.productimage} className="w-[50px] h-[50px]" />
                   </td>
                   <td className="p-[7px] text-center">{product.productId}</td>

@@ -10,7 +10,7 @@ export default function Adminpage(){
     
     return (
             <div className="w-full h-screen bg-white flex">
-                <div className="w-[300px] h-full bg-[#152f22] text-white" >
+                <div className="w-[300px] h-full bg-[#152f22]  border-r-3 border-black text-white" >
                     <h1 className="text-[25px] m-[20px] mb-[30px] font-bold text-center ">Admin Panel</h1>
                     <div className="flex flex-col ml-[30px] text-[20px] gap-[45px] text-white ">
                        <Link className="flex flex-row items-center gap-[10px]  hover:bg-white hover:text-[#152f22] hover:p-[5px] hover:rounded-lg" to="/admin/products"> <FaBoxArchive />Products</Link>
@@ -20,7 +20,7 @@ export default function Adminpage(){
                        
                     </div>
                 </div>
-                <div className="w-[calc(100%-300px)] bg-blue-300 text-xl">
+                <div className="w-[calc(100%-300px)] text-xl">
                     <Routes>
                         <Route path="/" element={<h1>DashBoard</h1>}/>
                         <Route path="/products" element={<ProductsAdminPage/>}/>

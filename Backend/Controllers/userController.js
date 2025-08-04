@@ -78,7 +78,7 @@ export function loginUser(req,res){
 
         res.json({message:"Login success",token:token,role:user.role})
       }else{
-        res.json({message:"Incorrect password"})
+        res.json({message:"Unauthorized"})
       }
     }
 })

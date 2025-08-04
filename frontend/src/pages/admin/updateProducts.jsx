@@ -3,6 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UploadFile from "../../utils/meadiaupload";
+import Loading from "../../components/loading";
 
 
 export default function UpdateProductPage() {
@@ -25,16 +26,16 @@ export default function UpdateProductPage() {
     const [altnames, setAltnames] = useState(location.state.altnames.join(","));
     const [labelledPrice, setLaballedprice] = useState(location.state.labelledPrice);
     const [price, setPrice] = useState(location.state.price);
-    const [images, setImages] = useState([]); // or [] if you're uploading images later
+    const [images, setImages] = useState(location.state.images); // or [] if you're uploading images later
     const [discription, setDiscription] = useState(location.state.discription);
     const [stock, setStock] = useState(location.state.stock);
     const [isAvailable, setIsAvailable] = useState(location.state.isAvailable);
     const [category, setCateqory] = useState(location.state.category);
     const navigate = useNavigate();
+    const[isLoading,setIsloading]=useState(false)
 
     async function handleSubmit() {
-
-
+        setIsloading(true)
         const promisesArray = images.map((image) => UploadFile(image));
 
         const response = await Promise.all(promisesArray);
@@ -82,13 +83,17 @@ export default function UpdateProductPage() {
             .catch((error) => {
                 console.error("Error updating products");
                 console.log(error);
-            });
+            })
+            .finally(()=>{
+                setIsloading(false)
+            })
 
     }
 
 
     return (
         <div className="w-full h-full bg-white grid place-content-center">
+            {isLoading?<Loading/>:<div>
             <div className="text-center mb-[30px] font-medium text-3xl">
                 <h1>Update Products</h1>
             </div>
@@ -244,6 +249,7 @@ export default function UpdateProductPage() {
                 </div>
 
             </div>
+            </div>}
         </div>
     )
 

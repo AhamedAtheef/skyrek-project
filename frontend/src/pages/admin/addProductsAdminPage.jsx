@@ -3,6 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import UploadFile from "../../utils/meadiaupload";
+import Loading from "../../components/loading";
 
 
 export default function AddProductPage() {
@@ -29,11 +30,12 @@ export default function AddProductPage() {
     const [stock, setStock] = useState("");
     const [isAvailable, setIsAvailable] = useState(true);
     const [category, setCateqory] = useState("");
+    const [isLoading,setIsloading]=useState(false)
     const navigate = useNavigate();
 
     async function handleSubmit() {
-
-
+        setIsloading(true)
+    
         const promisesArray = images.map((image) => UploadFile(image));
 
         const response = await Promise.all(promisesArray);
@@ -72,14 +74,20 @@ export default function AddProductPage() {
             })
             .catch((error) => {
                 console.error("Error adding products");
+                toast.error("Failed to add product");
                 console.log(error);
-            });
+                
+            })
+            .finally(()=>{
+                setIsloading(false)
+            })
 
     }
 
 
     return (
         <div className="w-full h-full bg-white grid place-content-center">
+            {isLoading?<Loading/>:<div>
             <div className="text-center mb-[30px] font-medium text-3xl">
                 <h1>Add Your Products</h1>
             </div>
@@ -234,6 +242,7 @@ export default function AddProductPage() {
                 </div>
 
             </div>
+            </div>}
         </div>
     )
 

@@ -17,8 +17,7 @@ export default function UploadFile(file) {
     const fileName = timeStamp + "-" + file.name;
 
     supabase.storage
-      .from("images")
-      .upload(fileName, file, { cacheControl: "3600", upsert: false })
+      .from("images").upload(fileName, file, { cacheControl: "3600", upsert: false })
       .then((response) => {
         if (response.error) {
           reject("Failed to upload file");

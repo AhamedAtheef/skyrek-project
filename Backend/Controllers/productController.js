@@ -8,11 +8,8 @@ export async function createProducts(req, res) {
     if (!isAdmin(req)) {
         return res.status(403).json({ message: "Access denied Admins only" })
     }
-
-
     const product = new Product(req.body)
     
-
     try {
         const response = await product.save()
         res.json({

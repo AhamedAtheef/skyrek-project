@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 export default function ProductCard(props) {
   const product = props.product;
   return (
-    <Link to={"/user/overview/"+product.productId} className="w-65 h-[360px] rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white">
+    <Link to={"/user/overview/" + product.productId} className="w-65 h-[360px] rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white">
       {/* image */}
       <div className="bg-gray-100 w-full  overflow-hidden relative">
-        <div class="inline-block bg-green-600 text-white text-sm font-semibold px-3 py-1 absolute  rounded-r-[0.25rem]">
-          {product.labelledPrice > product.price ? ('Discounted' ): (<span>{product.price.toFixed(2)}</span>) }
-        </div>
+        {product.labelledPrice > product.price && (
+          <div className="inline-block bg-green-600 text-white text-sm font-semibold px-3 py-1 absolute rounded-r-[0.25rem]">
+            Discounted
+          </div>
+        )}
 
         <img
           src={product.images[0]} alt={product.productimage}
-          className="h-[220px] w-full object-cover"
+          className="h-[230px] w-full content-center object-cover "
         />
       </div>
 
