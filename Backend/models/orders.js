@@ -46,6 +46,10 @@ const orderSchema = new mongoose.Schema({
             required:true
 
         },
+        images: {
+            type: [String],
+            default: "/default images"
+        },
         qty: {
             type: Number,
             required: true

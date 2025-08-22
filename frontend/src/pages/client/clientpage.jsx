@@ -3,6 +3,8 @@ import Header from "../../components/header";
 import ProductPage from "./product";
 import ProductOverview from "./productoverview";
 import HomePage from "./homepage";
+import CartPage from "./cart";
+import CheckOutPage from "./checkout";
 
 
 export function Clientpage() {
@@ -16,6 +18,8 @@ export function Clientpage() {
                 <Route path="/about" element={<h1>about</h1>}/>
                 <Route path="/contact" element={<h1>contact</h1>}/>
                 <Route path="/overview/:productId" element={<ProductOverview/>}/>
+                <Route path="/cart" element={<CartPage/>}/>
+                <Route path="/checkout" element={<CheckOutPage/>}/>
             </Routes>
             </div>
 

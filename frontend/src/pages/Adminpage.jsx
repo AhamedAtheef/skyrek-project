@@ -6,11 +6,12 @@ import { IoSettings } from "react-icons/io5";
 import ProductsAdminPage from "./admin/productAdminPage";
 import AddProductPage from "./admin/addProductsAdminPage";
 import UpdateProductPage from "./admin/updateProducts";
+import OrdersAdminPage from "./admin/ordersAdminpage";
 export default function Adminpage(){
     
     return (
-            <div className="w-full h-screen bg-white flex">
-                <div className="w-[300px] h-full bg-[#152f22]  border-r-3 border-black text-white" >
+            <div className="w-full min-h-full h-auto bg-white flex">
+                <div className="w-[300px] min-h-full h-auto bg-[#152f22]  border-r-3 border-black text-white" >
                     <h1 className="text-[25px] m-[20px] mb-[30px] font-bold text-center ">Admin Panel</h1>
                     <div className="flex flex-col ml-[30px] text-[20px] gap-[45px] text-white ">
                        <Link className="flex flex-row items-center gap-[10px]  hover:bg-white hover:text-[#152f22] hover:p-[5px] hover:rounded-lg" to="/admin/products"> <FaBoxArchive />Products</Link>
@@ -25,7 +26,7 @@ export default function Adminpage(){
                         <Route path="/" element={<h1>DashBoard</h1>}/>
                         <Route path="/products" element={<ProductsAdminPage/>}/>
                         <Route path="/newproduct" element={<AddProductPage/>}/>
-                        <Route path="/orders" element={<h1>Orders</h1>}/>
+                        <Route path="/orders" element={<OrdersAdminPage/>}/>
                         <Route path="/update" element={<UpdateProductPage/>}/>
                     </Routes>
                 </div>

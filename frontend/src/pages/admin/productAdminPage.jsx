@@ -6,33 +6,43 @@ import { BiTrash } from "react-icons/bi";
 import { BiEdit } from "react-icons/bi";
 import toast from "react-hot-toast";
 import Loading from "../../components/loading";
-
+import PaginatorBtn from "../../components/paginatorbtn";
 
 export default function ProductsAdminPage() {
 
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const limit=10;
   useEffect(() => {
     if (loading) {
-      axios.get(import.meta.env.VITE_BACKEND_URL + "/api/products").then((res) => {
-        setProducts(res.data)
-        setLoading(false)
+      axios.get(import.meta.env.VITE_BACKEND_URL + "/api/products/" + page + "/" + limit, 
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }).then((res) => {
+        setProducts(res.data.products);
+        setTotalPages(res.data.totalPages);
+        console.log(res.data.products);
+        setLoading(false);
       })
+        .catch((error) => {
+          console.error(error);
+          setLoading(false);
+        });
     }
-  }, [loading]);
+  }, [loading,page,limit]);
 
   return (
     <div className="w-full h-full bg-white ">
-      <div className="overflow-x-auto w-full p-[50px] ">
+      <div className="overflow-x-auto w-full pt-[40px] px-[50px] ">
         <h1 className="text-[30px] font-bold ">Products List</h1>
         <Link
-          to="/admin/newproduct" className="fixed top-4 right-[50px] flex flex-row items-center gap-[2px] bg-[#152f22] text-white px-[10px] py-[5px] rounded-lg ">
+          to="/admin/newproduct" className="fixed top-4 right-[50px] flex flex-row items-center gap-[2px] bg-[#256947] text-white px-[10px] py-[5px] rounded-lg ">
           <GoPlus className="text-2xl" /><span className="text-center mb-[3px] mr-[2px]">Create New</span></Link>
 
         {loading ? <Loading /> : <table className="w-full my-4 ">
-          <thead className="border-2 border-gray-300 ">
-            <tr >
+          <thead className="border-2 border-[#152f22] ">
+            <tr className="bg-[#082919] text-white">
               <th className="text-[21px] px-[7px] text-center font-medium">Image</th>
               <th className="text-[21px] p-[7px] text-center font-medium">Product Id</th>
               <th className="text-[21px] p-[7px] text-center font-medium">Product Name</th>
@@ -56,7 +66,7 @@ export default function ProductsAdminPage() {
                   <td className="p-[7px] text-center">{product.labelledPrice}</td>
                   <td className="p-[7px] text-center">{product.category}</td>
                   <td className="p-[7px] text-center">{product.stock}</td>
-                  <td className="p-[7px] flex justify-center items-center">
+                  <td className="px-[7px] pt-[15px]  flex justify-center items-center">
                     <BiTrash className="text-3xl text-red-700 cursor-pointer ml-[10px]" onClick={
                       () => {
                         const token = localStorage.getItem("token");
@@ -85,6 +95,7 @@ export default function ProductsAdminPage() {
           </tbody>
         </table>}
       </div>
+       <PaginatorBtn page={page} totalPages={totalPages}  onPageChange={setPage} setLoading={setLoading}/>
     </div>
 
   )

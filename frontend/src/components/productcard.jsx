@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 export default function ProductCard(props) {
   const product = props.product;
   return (
-    <Link to={"/user/overview/" + product.productId} className="w-65 h-[360px] rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white">
+    <Link
+      to={"/user/overview/" + product.productId}
+      className="group w-[22%] h-[400px] mt-[10px] rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white hover:shadow-2xl transition-all duration-300
+         max-[435px]:mt-[30px] max-[435px]:bg-transparent max-[435px]:border-0 max-[435px]:shadow-none max-[435px]:hover:shadow-2xl
+         max-[435px]:w-[calc(50%-7px)] max-[435px]:h-[290px] max-[435px]:rounded-none
+         sm:w-[calc(33%-16px)] md:w-[29%] md:ml-[10px] md:h-[350px] lg:w-[28%] lg:ml-[20px] xl:h-[380px] xl:w-[20%]"
+    >
       {/* image */}
-      <div className="bg-gray-100 w-full  overflow-hidden relative">
+      <div className="bg-gray-100 w-full overflow-hidden relative">
         {product.labelledPrice > product.price && (
           <div className="inline-block bg-green-600 text-white text-sm font-semibold px-3 py-1 absolute rounded-r-[0.25rem]">
             Discounted
@@ -13,32 +19,46 @@ export default function ProductCard(props) {
         )}
 
         <img
-          src={product.images[0]} alt={product.productimage}
-          className="h-[230px] w-full content-center object-cover "
+          src={product.images[0]}
+          alt={product.productimage}
+          className="h-[300px] w-full object-center transform transition-transform duration-300 group-hover:scale-105
+           max-[435px]:h-[180px] sm:h-[200px] md:h-[220px] lg:h-[230px] xl:h-[250px] "
         />
       </div>
 
       {/* content */}
-      <div className="pb-4 px-4 pt-2">
+      <div className="pb-4 px-4 pt-2 max-[435px]:px-2 max-[435px]:pt-1 max-[435px]:pb-2">
         {/* product name */}
-        <h2 className="text-[22px] font-semibold text-gray-800">
+        <h2 className="text-[22px] font-semibold text-gray-800 max-[435px]:text-[16px] sm:text-[18px]">
           {product.productname}
         </h2>
 
-        <div className="flex gap-[25px] mt-[10px]">
+        <div className="flex gap-[8px] max-[435px]:flex-col max-[770px]:flex-col max-[770px]:gap-0 max-[435px]:gap-0 mt-[10px] max-[435px]:mt-0 max-[770px]:mt-0">
           {/* price */}
-          <p className="text-[22px] font-bold text-gray-900"><span>LKR{product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
+          <p className="text-[22px] font-bold text-gray-900 max-[435px]:text-[16px] sm:text-[18px]">
+            <span>
+              LKR{product.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </span>
+          </p>
+
           {/* labelled Price */}
-          <p className="text-[19px] text-gray-500 line-through"><span>LKR{product.labelledPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
+          <p className="text-[19px] text-gray-500 line-through max-[435px]:text-[14px] sm:text-[16px]">
+            <span>
+              LKR{product.labelledPrice.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </span>
+          </p>
         </div>
 
         {/* stock */}
-        <p className={`mt-2 text-sm font-medium ${product.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
-          {product.stock > 0 ? `${product.stock} in stock` : 'All most sold out'}
+        <p
+          className={`mt-2 text-sm font-medium max-[435px]:text-xs sm:text-sm ${product.stock > 0 ? "text-green-600" : "text-red-500"
+            }`}
+        >
+          {product.stock > 0 ? `${product.stock} in stock` : "Almost sold out"}
         </p>
-
-
       </div>
     </Link>
-  );
+  )
+
+
 }

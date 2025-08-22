@@ -27,24 +27,29 @@ export async function createProducts(req, res) {
 }
 
 export async function getProducts(req, res) {
+    const page = parseInt(req.params.page) || 1
+    const limit = parseInt(req.params.limit) ;
+    console.log(page,limit)
+
     try {
         if (isAdmin(req)) {
+            let countPage = await Product.countDocuments();
+            let totalPages = Math.ceil(countPage / limit);
+            
 
-            const products = await Product.find()
-            return res.json(products)
-
+            const products = await Product.find().skip((page - 1) * limit).limit(limit).sort({ date: -1 });
+            return res.json({ products, totalPages });
+            
         } else {
-
-            const products = await Product.find({ isAvailable: true })
-            return res.json(products)
-
+            const products = await Product.find({ isAvailable: true });
+            // Keep the same structure so frontend always works
+            return res.json({ products, totalPages: 1 });
         }
     } catch (error) {
         console.error("Error fetching products:", error);
-        return res.status(500).json({ message: "failed to fetch products" })
+        return res.status(500).json({ message: "failed to fetch products" });
     }
 }
-
 export async function deleteProducts(req, res) {
 
     if (!isAdmin(req)) {

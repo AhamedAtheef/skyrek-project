@@ -84,6 +84,14 @@ export function loginUser(req,res){
 })
 }
 
+export function isUser(req) {
+    if (req.user == null) {
+        res.status(401).json({ message: "user not found" })
+    } else {
+        res.json(req.user)
+    }
+}
+ 
 export function isAdmin(req) {
     if (req.user == null) {
         return false;

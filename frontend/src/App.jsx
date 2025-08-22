@@ -6,7 +6,6 @@ import Testpage from "./pages/Testpage"
 import { Toaster } from "react-hot-toast"
 import { Clientpage } from "./pages/client/clientpage"
 import HomeBtn from "./components/homebtn"
-
 function App() {
  
   return (
@@ -20,6 +19,7 @@ function App() {
         <Route path="/test" element={<Testpage/>}/>
         <Route path="/user/*" element={<Clientpage/>}/>
         <Route path="/*" element={<HomeBtn/> }/>
+     
         </Routes>
       </div>
     

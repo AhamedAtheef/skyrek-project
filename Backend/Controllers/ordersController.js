@@ -1,5 +1,6 @@
 import Order from "../models/orders.js";
 import Product from "../models/product.js";
+import { isAdmin } from "./userController.js";
 
 export async function CreateOrder(req, res) {
     try {
@@ -33,11 +34,13 @@ export async function CreateOrder(req, res) {
                 items.push({
                     productId: product.productId,
                     price: product.price,
+                    images: item.images,
                     name: product.productname,
                     qty: item.qty
+
                 });
-                console.log(items)
-                total += product.price * item.qty;
+                
+                total = req.body.total;
             }
 
 
@@ -47,13 +50,14 @@ export async function CreateOrder(req, res) {
         const order = new Order({
             orderID: orderId,
             email: req.user.email,
-            name: req.user.firstName + " " + req.user.lastName,
+            name: req.body.name,
             address: req.body.address,
             phone: req.body.phone,
             items: items,
             total: total,
             status: "Pending"
         })
+        console.log(order)
 
         const result = await order.save();
         res.json({
@@ -68,22 +72,65 @@ export async function CreateOrder(req, res) {
 }
 
 export async function getOrders(req, res) {
-    if (req.user == null) {
-        return res.status(401).json({ message: "Please Login First" })
+    const page = parseInt(req.params.page) || 1;//get page
+    const limit = parseInt(req.params.limit) || 10;//get limid or set default
+
+    if (!req.user) {
+        return res.status(401).json({ message: "Please Login First" });
     }
 
     try {
-        if (req.user.role == "admin") {
-            const orders = await Order.find().sort({ dare: -1 })
-            res.json(orders)
+        let orders, countOrders, totalPages;
+
+        if (req.user.role === "admin") {
+            // Count all orders
+            countOrders = await Order.countDocuments();
+            totalPages = Math.ceil(countOrders / limit);//calculate total pages
+
+            orders = await Order.find().skip((page - 1) * limit).limit(limit).sort({ date: -1 });
+
         } else {
-            const orders = await Order.find({ email: req.user.email })
-            res.json(orders)
+            // Count only user's orders
+            countOrders = await Order.countDocuments({ email: req.user.email });
+            totalPages = Math.ceil(countOrders / limit);
+
+            orders = await Order.find({ email: req.user.email }).skip((page - 1) * limit).limit(limit).sort({ date: -1 });
         }
+        res.json({
+            orders,
+            totalPages
+        });
 
     } catch (error) {
         console.error("Error fetching orders:", error);
-        return res.status(500).json({ message: "Failed to fetch orders" });
+        res.status(500).json({ message: "Failed to fetch orders" });
+    }
+}
+
+export async function updateOrder(req, res) {
+    if (!isAdmin(req)) {
+        return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
+    try {
+        const order = await Order.findOneAndUpdate({orderID:req.params.orderID});
+
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        order.status = req.body.status;
+        order.notes = req.body.notes;
+
+        const result = await order.save();
+
+        res.json({
+            message: "Order Updated Successfully",
+            result: result
+        });
+
+    } catch (error) {
+        console.error("Error updating order:", error);
+        return res.status(500).json({ message: "Failed to update order" });
+    }
 }
